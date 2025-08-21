@@ -506,15 +506,15 @@ var CreateAgentRemoteDesktop = function (canvasid, scrolldiv) {
     obj.SendStringUnicode = function (str) {
         if (obj.State != 3) return;
         for (var i = 0; i < str.length; i++) {
-            obj.send(String.fromCharCode(0x00, obj.InputType.KEYUNICODE, 0x00, 0x07, 0) + ShortToStr(str.charCodeAt(i)));
-            obj.send(String.fromCharCode(0x00, obj.InputType.KEYUNICODE, 0x00, 0x07, 1) + ShortToStr(str.charCodeAt(i)));
+            obj.send(String.fromCharCode(0x00, obj.InputType.KEYUNICODE, 0x00, 0x07, 0) + obj.ShortToStr(str.charCodeAt(i)));
+            obj.send(String.fromCharCode(0x00, obj.InputType.KEYUNICODE, 0x00, 0x07, 1) + obj.ShortToStr(str.charCodeAt(i)));
         }
     }
 
     obj.SendKeyUnicode = function (action, val) {
         if (obj.State != 3) return;
         if (obj.debugmode > 0) { console.log('Sending UnicodeKey ' + val + ', action ' + action); }
-        obj.send(String.fromCharCode(0x00, obj.InputType.KEYUNICODE, 0x00, 0x07, (action - 1)) + ShortToStr(val));
+        obj.send(String.fromCharCode(0x00, obj.InputType.KEYUNICODE, 0x00, 0x07, (action - 1)) + obj.ShortToStr(val));
     }
 
     obj.sendcad = function() { obj.SendCtrlAltDelMsg(); }
